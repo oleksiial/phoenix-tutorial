@@ -6,6 +6,7 @@ defmodule DemoApp.Accounts.Credential do
 
   schema "credentials" do
     field :email, :string
+    field :password, :string
     belongs_to :user, User
     timestamps()
   end
@@ -13,8 +14,8 @@ defmodule DemoApp.Accounts.Credential do
   @doc false
   def changeset(%Credential{} = credential, attrs) do
     credential
-    |> cast(attrs, [:email])
-    |> validate_required([:email])
+    |> cast(attrs, [:email, :password])
+    |> validate_required([:email, :password])
     |> unique_constraint(:email)
   end
 end
